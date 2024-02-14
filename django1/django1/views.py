@@ -20,7 +20,10 @@ def home(request):
     # create a list to implement if and ifelse statement
     # 'anylist': [30, 31, 35, 101, 99, 67, 18]
     # }
-    HiringData = jobHiring.objects.all()
+    # HiringData = jobHiring.objects.all().order_by('-id')
+    HiringData = jobHiring.objects.all().order_by('-salary')[:] # Slicing is used for limiting
+    # we can also do like this:
+    # HiringData = jobHiring.objects.all().order_by('jobTitle')
     data = {    
         'HiringData':HiringData
     }
@@ -35,11 +38,11 @@ def freelancer(request):
     return render(request, "freelancer.html")
 
 def job(request):
-    # HiringData = jobHiring.objects.all()
-    # data = {    
-    #     'HiringData':HiringData
-    # }
-    return render(request, "job.html")
+    HiringData = jobHiring.objects.all().order_by('-id')
+    data = {    
+        'HiringData':HiringData
+    }
+    return render(request, "job.html", data)
 
 def login(request):
     # print(request.POST, "Hello")
