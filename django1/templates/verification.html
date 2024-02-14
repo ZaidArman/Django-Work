@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- verification section -->
+<section class="verification_section layout_padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="detail-box">
+                    <div class="heading_container">
+                        <h2 class="text-white">
+                            Verification
+                        </h2>
+                    </div>
+                    <!-- Your verification form goes here -->
+
+                    <!-- Add this snippet to display error messages -->
+                    {% if error %}
+                    <p class="text-danger">{{ error }}</p>
+                    {% endif %}
+
+                    <!-- Add this form in your verification.html -->
+                    <form action="{% url 'verification' verifyID=verifyID %}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="verification_code" class="text-white">Verification Code:</label>
+                        <input type="text" name="verification_code" class="form-control" id="verification_code" placeholder="Enter the 6-digit code" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Confirm</button>
+                    </form>
+
+                                        
+                    <!-- End of verification form -->
+                </div>
+            </div>
+
+            {% comment %} <div class="col-md-6">
+                <div class="img-box">
+                    <!-- You can add an image or any verification-related visuals here -->
+                    <img src="images/verification-img.jpg" alt="Verification Image">
+                </div>
+            </div> {% endcomment %}
+
+        </div>
+    </div>
+</section>
+<!-- end verification section -->
+
+{% endblock content %}
