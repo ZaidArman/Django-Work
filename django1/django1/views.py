@@ -13,7 +13,12 @@ data = {
     }
 
 def NewsDetails(request, news_id):
-    return redirect(request, "index.html", {'news_id':news_id})
+    news_details = NewsModel.objects.get(id=news_id)
+    data = {    
+        'news_details': news_details
+    }
+
+    return render(request, "newsdetails.html", data)
     
 def home(request):
     # using dictionary we can send our message or data to any html page from views.py file like this:

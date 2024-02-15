@@ -100,11 +100,11 @@
             </div>
         </header>
         <!-- end header section -->
-        
-        {% if request.path != '/login/' and request.path != '/signup/' %}
-            {% for n in news_data %}
-                <marquee class="marq" onmouseover="stop()" onmouseout="start()"> <a href=#> {{n.news_title}} </a> </marquee>
-            {% endfor %}
+        {% if request.path != '/login/' and request.path != '/signup/' and "/newsdetails/" not in request.path%}
+        <marquee class="marq" onmouseover="stop()" onmouseout="start()">
+        {% for n in news_data %}
+                <a href="{% url 'new_details' n.id %}"> {{n.news_title}} &nbsp &nbsp &nbsp &nbsp</a>
+        {% endfor %}
+        </marquee>
         {% endif %}
-        
         {% comment %} <marquee class="marq">This text will scroll from right to left</marquee> {% endcomment %}
