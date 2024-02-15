@@ -12,7 +12,8 @@ urlpatterns = [
     path('job/', views.job, name='job'),
     path('login/', views.login, name='login'),
     path('signup/', views.signup, name='signup'),
-    path('signup/<slug:verifyID>', views.verification, name="verification")
+    path('signup/<slug:verifyID>', views.verification, name="verification"),
+    path('newsdetails/<int:news_id>', views.NewsDetails(), name="News Details")
     
     # 'about/<int/str/slug:historyID>' or we can leave empty if we don't know about our data
     # path('about/<int:historyID>', views.about_histrory, name='about_history'), # dynamic routing/urls

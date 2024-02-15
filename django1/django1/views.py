@@ -3,7 +3,18 @@ from django.shortcuts import render, redirect
 # from django.contrib import messages
 from .forms import LogInForm, SignUp
 from jobs.models import jobHiring
+from news.models import NewsModel
 
+news_data = NewsModel.objects.all()
+HiringData = jobHiring.objects.all().order_by('-salary')[:] # Slicing is used for limiting
+data = {    
+        'HiringData':HiringData,
+        'news_data': news_data
+    }
+
+def NewsDetails(request, news_id):
+    return redirect(request, "index.html", {'news_id':news_id})
+    
 def home(request):
     # using dictionary we can send our message or data to any html page from views.py file like this:
     # msg = {
@@ -20,28 +31,27 @@ def home(request):
     # create a list to implement if and ifelse statement
     # 'anylist': [30, 31, 35, 101, 99, 67, 18]
     # }
+    
     # HiringData = jobHiring.objects.all().order_by('-id')
-    HiringData = jobHiring.objects.all().order_by('-salary')[:] # Slicing is used for limiting
+   
     # we can also do like this:
     # HiringData = jobHiring.objects.all().order_by('jobTitle')
-    data = {    
-        'HiringData':HiringData
-    }
+    
     return render(request, "index.html", data)  # here we can pass three argument
 
 
 def about(request):
-    return render(request, "about.html")
+    return render(request, "about.html", data)
 
 
 def freelancer(request):
-    return render(request, "freelancer.html")
+    return render(request, "freelancer.html", data)
 
 def job(request):
-    HiringData = jobHiring.objects.all().order_by('-id')
-    data = {    
-        'HiringData':HiringData
-    }
+    # HiringData = jobHiring.objects.all().order_by('-id')
+    # data = {    
+    #     'HiringData':HiringData
+    # }
     return render(request, "job.html", data)
 
 def login(request):
