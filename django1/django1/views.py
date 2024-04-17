@@ -14,6 +14,7 @@ data = {
 
 def NewsDetails(request, news_id):
     news_details = NewsModel.objects.get(id=news_id)
+    # print(news_details.news_slug)
     data = {    
         'news_details': news_details
     }
